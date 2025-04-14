@@ -30,11 +30,12 @@ function isPalindrome(parola) {
 
     // Versione con UNSHIFT
     // const caratteriInversi = [];
-    // for (let i = 0; i < parola.length; i++) {
-    //     const carattere = parola[i];
+    // const parolaSenzaSpazi = parola.trim();
+    // for (let i = 0; i < parolaSenzaSpazi.length; i++) {
+    //     const carattere = parolaSenzaSpazi[i];
     //     caratteriInversi.unshift(carattere);
     // }
-    // return parola === caratteriInversi.join('');
+    // return parolaSenzaSpazi === caratteriInversi.join('');
 
     const parolaInversa = parola.trim().split('').reverse().join('');
     return parola.trim() === parolaInversa;
