@@ -9,7 +9,9 @@ const {
     createSlug,
     average,
     isPalindrome,
-} = require('./snacks.js');
+    findPostByid,
+}
+    = require('./snacks.js');
 
 
 
@@ -42,14 +44,27 @@ test('La funzione createSlug sostituisce gli spazi con "-".', () => {
 });
 
 // Snack 5
-test('La funzione isPalindrome verifica se una stringa è palindroma', () => {
+test('La funzione isPalindrome verifica se una stringa è palindroma.', () => {
     expect(isPalindrome('anna ')).toBeTruthy();
     expect(isPalindrome('boolean')).toBeFalsy();
 });
 
 // Snack 6
-test('La funzione createSlug lancia un errore se la stringa è vuota o non valida', () => {
+test('La funzione createSlug lancia un errore se la stringa è vuota o non valida.', () => {
     // All'interno del "toTrow" posso passare una stringa contenente il messaggio di errore.
     expect(() => createSlug('')).toThrow('Stringa non valida');
     expect(() => createSlug(null)).toThrow('Stringa non valida');
+})
+
+const posts = [
+    { id: 1, title: "Introduzione a JavaScript", slug: 'introduzione-a-javascript' },
+    { id: 2, title: "React Hooks", slug: 'react-hooks' },
+]
+
+// Snack 7
+test('La funzione findPostByid restituisce il post corretto dato l\'array di post e l\'id.', () => {
+    expect(findPostByid(posts, 2)).toEqual({ id: 2, title: "React Hooks", slug: 'react-hooks' });
+    expect(findPostByid(posts, 3)).toBe(null);
+    expect(() => findPostByid(posts, 'ciao')).toThrow('"ciao" non è un id');
+    expect(() => findPostByid([34, 67], 2)).toThrow('L\'array posts non è nel formato corretto');
 })
