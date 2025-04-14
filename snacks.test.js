@@ -18,6 +18,7 @@ const {
 // DATA
 
 // Siccome uso questa base di dati in più TEST, e i test devo SEMPRE essere ripetibili e svincolati tra loro, uso BEFORE-EACH e AFTER-EACH, due funzioni che mi permettono di "resettare" in questo caso il valore della mia variabile "posts", così da partire sempre dallo stesso valore ad ogn esperimento e test, senza dover tener conto delle modifiche che i miei dati subiscono durante i TEST.
+// Inoltre, il mio Array di Posts si trova fuori dai DESCRIBES perchè deve essere utilizzato in più di un DESCRIBE, quindi deve avere uno scope globale in questo file per i Test. In poche parole: i Post devono essere "resettati" dopo QUALSIASI test e non solo quelli di un DESCRIBE specifico. Se li mettessi dentro un DESCRIBE si resetterebbero solo dopo i Test all'interno di quel DESCRIBE.
 
 let posts;
 
@@ -116,6 +117,13 @@ describe('Generazione di Slug', () => {
         // All'interno del "toTrow" posso passare una stringa contenente il messaggio di errore.
         expect(() => createSlug('')).toThrow('Stringa non valida');
         expect(() => createSlug(null)).toThrow('Stringa non valida');
+    })
+
+    // Snack 10 - BONUS
+    test('Se viene passato un array di post come secondo argomento, la funzione createSlug icrementa di 1 se lo slug esiste già.', () => {
+        expect(createSlug('React Hooks', posts)).toBe('react-hooks-1');
+        addPost(posts, { id: 3, title: 'React Hooks', slug: createSlug('React Hooks', posts) });
+        expect(posts[posts.length - 1].slug).toBe('react-hooks-1');
     })
 })
 
