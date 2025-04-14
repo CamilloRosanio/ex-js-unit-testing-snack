@@ -32,6 +32,7 @@ test('La funzione createSlug restituisce una stringa in lowercase.', () => {
 test('La funzione "average" calcola la media aritmetica di un array di numeri.', () => {
     expect(average([5, 15])).toBe(10);
     expect(average([10, 20, 30, 40, 50])).toBe(30);
+    // Siccome devo gestire un THROW e non un risultato con RETURN, in questo caso devo passare una CALLBACK FUNCTION all'EXPECT, e non più la sola funzione.
     expect(() => average([5, 'ciao'])).toThrow();
 });
 
@@ -45,3 +46,10 @@ test('La funzione isPalindrome verifica se una stringa è palindroma', () => {
     expect(isPalindrome('anna ')).toBeTruthy();
     expect(isPalindrome('boolean')).toBeFalsy();
 });
+
+// Snack 6
+test('La funzione createSlug lancia un errore se la stringa è vuota o non valida', () => {
+    // All'interno del "toTrow" posso passare una stringa contenente il messaggio di errore.
+    expect(() => createSlug('')).toThrow('Stringa non valida');
+    expect(() => createSlug(null)).toThrow('Stringa non valida');
+})
