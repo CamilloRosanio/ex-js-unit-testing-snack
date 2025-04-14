@@ -23,9 +23,8 @@ test('La funzione getInitials restituisce le iniziali di un nome copleto.', () =
 
 // Snack 2
 test('La funzione createSlug restituisce una stringa in lowercase.', () => {
-    expect(createSlug('La mia stringa COn MAIUscole')).toBe('la mia stringa con maiuscole');
+    expect(createSlug('Titolo MOLTO bello')).toBe('titolo-molto-bello');
 });
-
 
 
 // Snack 3
@@ -37,5 +36,5 @@ test('La funzione "average" calcola la media aritmetica di un array di numeri.',
 
 // Snack 4
 test('La funzione createSlug sostituisce gli spazi con "-".', () => {
-    expect(createSlug('Titolo molto bello')).toBe('Titolo-molto-bello');
+    expect(createSlug('Titolo molto bello')).toBe('titolo-molto-bello');
 });
