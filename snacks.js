@@ -61,6 +61,25 @@ function findPostByid(posts, id) {
     return posts.find(p => p.id === id) || null;
 }
 
+function addPost(posts, post) {
+    const ids = posts.map(p => p.id);
+    const slugs = posts.map(p => p.slug);
+
+    if (ids.includes(post.id)) {
+        throw new Error('Id già esistente');
+    }
+    if (slugs.includes(post.slug)) {
+        throw new Error('Slug già esistente');
+    }
+
+    posts.push(post);
+}
+
+function removePost(posts, id) {
+    const index = posts.findIndex(p => p.id === id);
+    posts.splice(index, 1);
+}
+
 
 
 module.exports = {
@@ -69,4 +88,6 @@ module.exports = {
     average,
     isPalindrome,
     findPostByid,
+    addPost,
+    removePost,
 }

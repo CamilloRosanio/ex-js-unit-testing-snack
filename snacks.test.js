@@ -10,14 +10,27 @@ const {
     average,
     isPalindrome,
     findPostByid,
+    addPost,
+    removePost,
 } = require('./snacks.js');
 
 
 // DATA
-const posts = [
-    { id: 1, title: "Introduzione a JavaScript", slug: 'introduzione-a-javascript' },
-    { id: 2, title: "React Hooks", slug: 'react-hooks' },
-]
+
+// Siccome uso questa base di dati in più TEST, e i test devo SEMPRE essere ripetibili e svincolati tra loro, uso BEFORE-EACH e AFTER-EACH, due funzioni che mi permettono di "resettare" in questo caso il valore della mia variabile "posts", così da partire sempre dallo stesso valore ad ogn esperimento e test, senza dover tener conto delle modifiche che i miei dati subiscono durante i TEST.
+
+let posts;
+
+beforeEach(() => {
+    posts = [
+        { id: 1, title: "Introduzione a JavaScript", slug: 'introduzione-a-javascript' },
+        { id: 2, title: "React Hooks", slug: 'react-hooks' },
+    ]
+})
+
+afterEach(() => {
+    posts = [];
+})
 
 
 
@@ -61,6 +74,27 @@ describe('Operazioni su Array', () => {
         expect(() => findPostByid(posts, 'ciao')).toThrow('"ciao" non è un id');
         expect(() => findPostByid([34, 67], 2)).toThrow('L\'array posts non è nel formato corretto');
     })
+
+    // Snack 8 - BONUS
+    test('Dopo aver aggiunto un post con la funzione addPost, l\'array posts deve contenere un elemento in più.', () => {
+        addPost(posts, { id: 3, title: "Introduzione a Typescript", slug: 'introduzione-a-typescript' })
+        expect(posts).toHaveLength(3);
+    })
+
+    test('Dopo aver rimosso un post con la funzione removePost, l\'array posts deve contenere un elemento in meno.', () => {
+        removePost(posts, 2);
+        expect(posts).toHaveLength(1);
+    })
+
+    // Snack 9 - BONUS
+    test('Se si tenta di aggiungere un post con un id o uno slug già esistente, la funzione addPost deve lanciare un errore.', () => {
+        expect(() => addPost(posts, { id: 2, title: "Post di test", slug: 'post-di-test' })).
+            toThrow('Id già esistente');
+
+        expect(() => addPost(posts, { id: 3, title: "React Hooks", slug: 'react-hooks' })).
+            toThrow('Slug già esistente');
+    })
+
 })
 
 
@@ -84,4 +118,5 @@ describe('Generazione di Slug', () => {
         expect(() => createSlug(null)).toThrow('Stringa non valida');
     })
 })
+
 
