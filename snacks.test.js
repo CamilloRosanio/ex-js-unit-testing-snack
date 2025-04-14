@@ -8,6 +8,7 @@ const {
     getInitials,
     createSlug,
     average,
+    isPalindrome,
 } = require('./snacks.js');
 
 
@@ -37,4 +38,10 @@ test('La funzione "average" calcola la media aritmetica di un array di numeri.',
 // Snack 4
 test('La funzione createSlug sostituisce gli spazi con "-".', () => {
     expect(createSlug('Titolo molto bello')).toBe('titolo-molto-bello');
+});
+
+// Snack 5
+test('La funzione isPalindrome verifica se una stringa è palindroma', () => {
+    expect(isPalindrome('anna ')).toBeTruthy();
+    expect(isPalindrome('boolean')).toBeFalsy();
 });

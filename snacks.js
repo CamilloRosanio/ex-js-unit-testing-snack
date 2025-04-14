@@ -26,10 +26,26 @@ function average(numeri) {
     return numeri.reduce((acc, n) => acc + n, 0) / numeri.length;
 }
 
+function isPalindrome(parola) {
+
+    // Versione con UNSHIFT
+    // const caratteriInversi = [];
+    // for (let i = 0; i < parola.length; i++) {
+    //     const carattere = parola[i];
+    //     caratteriInversi.unshift(carattere);
+    // }
+    // return parola === caratteriInversi.join('');
+
+    const parolaInversa = parola.trim().split('').reverse().join('');
+    return parola.trim() === parolaInversa;
+
+}
+
 
 
 module.exports = {
     getInitials,
     createSlug,
     average,
+    isPalindrome,
 }
