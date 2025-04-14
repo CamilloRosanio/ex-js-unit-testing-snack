@@ -1,17 +1,41 @@
-// Quando eseguo il REFACTURING, cioè aggiorno il mio codice, posso salvare le mie funzioni su files a parte invece che qui nel mio foglio di test. Dopo il TEST le importo per lasciarle nei miei test che devono continuare a funzionare durante i vari REFACTURING.
-// Ricordiamo che lo scopo è provare vari casi possibili, ecco perchè per esempio nel primo test passo stringhe differenti, maiuscole e minuscole, doppio spazio tra nome e cognome, e così via..
+// Lo scopo dei TESTS è provare vari casi possibili, ecco perchè per esempio nel primo test passo stringhe differenti, maiuscole e minuscole, doppio spazio tra nome e cognome, e così via..
+// Quando eseguo il REFACTURING, cioè aggiorno il mio codice, posso salvare le mie funzioni su files a parte invece che qui nel mio foglio di test. Dopo il TEST le importo per renderle disponibili per i miei test che devono (SEMPRE) continuare a funzionare durante i vari REFACTURING.
 
 
 
 // IMPORT FUNZIONI (REFACTURING)
-const { getInitials } = require('./snacks.js');
+const {
+    getInitials,
+    createSlug,
+    average,
+} = require('./snacks.js');
 
 
 
 // TESTS
 
+// Snack 1
 test('La funzione getInitials restituisce le iniziali di un nome copleto.', () => {
     expect(getInitials('Mario Rossi')).toBe('M.R.');
     expect(getInitials('luigi bianchi')).toBe('L.B.');
     expect(getInitials('doppio  spazio')).toBe('D.S.');
+});
+
+// Snack 2
+test('La funzione createSlug restituisce una stringa in lowercase.', () => {
+    expect(createSlug('La mia stringa COn MAIUscole')).toBe('la mia stringa con maiuscole');
+});
+
+
+
+// Snack 3
+test('La funzione "average" calcola la media aritmetica di un array di numeri.', () => {
+    expect(average([5, 15])).toBe(10);
+    expect(average([10, 20, 30, 40, 50])).toBe(30);
+    expect(() => average([5, 'ciao'])).toThrow();
+});
+
+// Snack 4
+test('La funzione createSlug sostituisce gli spazi con "-".', () => {
+    expect(createSlug('Titolo molto bello')).toBe('Titolo-molto-bello');
 });
